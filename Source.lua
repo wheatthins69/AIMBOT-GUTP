@@ -420,7 +420,7 @@ local function DrawLine(P0, P1, Color, Thickness, Transparency, Is2D)
     local Line = CreateDrawing("Line");
     Line.Color = Color;
     Line.From, Line.To = P0, P1;
-    Line.Visible = true;
+    Line.Visible = false;
     Line.Thickness = Thickness;
     Line.Transparency = 1 - Transparency;
     return Line;
@@ -442,7 +442,7 @@ local function DrawRadialHitbox(self)
     Radial.Radius = RadialHitbox;
     Radial.Color = Color;
     Radial.Transparency = Transparency;
-    Radial.Visible = true;
+    Radial.Visible = false;
     local Distance = (MPos - Center).Magnitude;
     self.MouseDistance = Distance;
     self.MouseInRadius = Distance <= RadialHitbox;
@@ -457,7 +457,7 @@ local function DrawText(self)
         Size = (self.MaxX - self.MinX) / 10;
     end;
     local TextDrawing = CreateDrawing("Text");
-    TextDrawing.Visible = true;
+    TextDrawing.Visible = false;
     TextDrawing.Text, TextDrawing.Font, TextDrawing.Size, TextDrawing.Color = Text, Font, Size, self.CurrentColor;
     TextDrawing.Outline, TextDrawing.OutlineColor = TextOutlineVisible, TextOutlineColor;
     local TextPadding = self.TextPadding;
@@ -494,7 +494,7 @@ local function DrawTracer(self)
     Line.Color = self.CurrentColor;
     Line.Transparency = self.Opacity;
     Line.Thickness = self.Thickness;
-    Line.Visible = true;
+    Line.Visible = false;
 end;
 
 local function DrawHealth(self)
@@ -527,7 +527,7 @@ local function DrawLineOnRadius(Center, Radian, R0, R1, Color, Thickness)
     Line.Color, Line.Thickness = Color, Thickness;
     Line.From = Center + NewV2(XComponent * R0, YComponent * R0);
     Line.To = Center + NewV2(XComponent * R1, YComponent * R1);
-    Line.Visible = true;
+    Line.Visible = false;
     return Line;
 end;
 
@@ -537,18 +537,18 @@ local function DrawCrosshair(self, Center)
 
     local Color = self.CurrentColor;
     local CenterDot = CreateDrawing("Circle");
-    CenterDot.Filled = true;
+    CenterDot.Filled = false;
     CenterDot.Thickness = 0;
     CenterDot.Radius = 4;
     CenterDot.Color = Color;
     CenterDot.Position = Center;
-    CenterDot.Visible = true;
+    CenterDot.Visible = false;
     local OuterRadius = CreateDrawing("Circle");
     OuterRadius.Radius = 11;
     OuterRadius.Thickness = 3;
     OuterRadius.Color = Color;
     OuterRadius.Position = Center;
-    OuterRadius.Visible = true;
+    OuterRadius.Visible = false;
     local Rotation = Rad(self.CrosshairRotation);
     DrawLineOnRadius(Center, Rotation, 5, 15, Color, 3);
     DrawLineOnRadius(Center, Rotation + PI * 0.5, 5, 15, Color, 3);
@@ -823,7 +823,7 @@ function ESPs.BoundingBox:Render()
     Box.Size = self.Max2DPoint - self.Min2DPoint;
     Box.Position = self.Min2DPoint;
     Box.Color = Color;
-    Box.Visible = true;
+    Box.Visible = false;
     Box.Transparency = Opacity;
 end;
 --#endregion
